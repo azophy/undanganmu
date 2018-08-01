@@ -1,5 +1,19 @@
 <?php
 
+$DB_URL = ((null != getenv('DATABASE_URL')) ? getenv('DATABASE_URL') : 'mysql://root:root@localhost/db_name');
+//error_log('DB_URL = '.$DB_URL);
+
+$extract = parse_url($DB_URL);
+if ($extract['scheme'] == 'postgres') $extract['scheme'] = 'pgsql';
+
+putenv('DB_CONNECTION='.$extract['scheme']);
+putenv('DB_HOST='.$extract['host']);
+if (isset($extract['port']))
+    putenv('DB_PORT='.$extract['port']);
+putenv('DB_DATABASE='.substr($extract['path'],1));
+putenv('DB_USERNAME='.$extract['user']);
+putenv('DB_PASSWORD='.$extract['pass']);
+
 return [
 
     /*
