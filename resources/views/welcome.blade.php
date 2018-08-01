@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    UNDANGAN.MU
                 </div>
 
                 <div class="links">
