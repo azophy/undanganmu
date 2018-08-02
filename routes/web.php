@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::domain('main.undangan-mu.herokuapp.com')->group(function () {
+    Route::get('/', function () {
+        return view('welcome_main');
+    });
+});
