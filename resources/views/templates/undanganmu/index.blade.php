@@ -16,7 +16,7 @@ function asset_url($param) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Creative - Start Bootstrap Theme</title>
+    <title>Undangan.mu - Wujudkan Undangan Digital Impianmu!</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset_url('templates/undanganmu') }}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
