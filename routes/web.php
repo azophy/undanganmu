@@ -20,3 +20,7 @@ Route::domain('main.undangan-mu.herokuapp.com')->group(function () {
         return view('welcome_main');
     });
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
