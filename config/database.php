@@ -1,6 +1,6 @@
 <?php
 
-$DB_URL = ((null != getenv('DATABASE_URL')) ? getenv('DATABASE_URL') : 'mysql://root:root@localhost/db_name');
+$DB_URL = ((null != env('DATABASE_URL')) ? env('DATABASE_URL') : 'mysql://root:root@localhost/db_name');
 //error_log('DB_URL = '.$DB_URL);
 
 $extract = parse_url($DB_URL);
