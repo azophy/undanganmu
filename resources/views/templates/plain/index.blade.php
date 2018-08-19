@@ -8,12 +8,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>@yield('page_title')</title>
+    <title>Pernikahan {{ $info->name_bride }} dan {{ $info->name_groom }}</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!-- Custom styles for this template -->
-    <link href="css/main.css" rel="stylesheet">
+    <link href="{{ asset('templates/plain') }}/css/main.css" rel="stylesheet">
 
     <style>
     #list_pesan_wall {
@@ -40,7 +40,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Hilya & Yahya</a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">{{ $info->name_bride }} & {{ $info->name_groom }}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -62,8 +62,8 @@
 
     <header class="bg-primary text-white">
       <div class="container text-center">
-        <h1>Hilya & Yahya</h1>
-        <p class="lead">16 September 2018 @ Jakarta</p>
+        <h1>{{ $info->name_bride }} & {{ $info->name_groom }}</h1>
+        <p class="lead">{{ $info->date }} @ {{ $info->location->city }}</p>
       </div>
     </header>
 
@@ -74,12 +74,14 @@
             <h2>Informasi Acara</h2>
             <p class="lead">Insya Allah akan dilaksanakan pada :</p>
             <ul>
-              <li>Hari: Ahad, 16 September 2018</li>
+              <li>Hari: {{ $info->date }}</li>
               <li>Jam: 
                 <ul>
-                    <li>Akad: 8.00-9.00</li>
+                    @foreach ($info->events as $event)
+                    <li>{{ $event->title }}: {{ $event->time }}</li>
+                    @endforeach
                 </ul> </li>
-              <li>Tempat: Gedung Sasono Utomo , Taman Mini Indonesia Indah</li>
+              <li>Tempat: {{ $info->location->name }}, {{ $info->location->city }}</li>
             </ul>
           </div>
         </div>
@@ -92,35 +94,8 @@
           <div class="col-lg-12 mx-auto">
             <h2>Denah Lokasi</h2>
             
-            @yield('google_map')
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="rsvp">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <h2>RSVP</h2>
-
-            @yield('form_rsvp')
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="list_pesan" class="bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <center><h2>Pesan dari para pengunjung</h2></center>
-            <div class="row">
-                <div class="col-lg-12">
-                    @yield('pesan_wall')
-                </div>
-            </div>
+            Denah lokasi: <a href="{{ url('/'.$site->url_name.'/lokasi') }}">{{ url('/'.$site->url_name.'/lokasi') }}</a>
+            <iframe src="https://www.google.com/maps/embed?pb={{ $info->location->google_map_embed_param }}" style="width:100%;height:80vh" frameborder="0" style="border:0" allowfullscreen></iframe>
 
           </div>
         </div>
@@ -220,10 +195,10 @@ echo "</div>";
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="js/jquery.easing.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
     <!-- Custom JavaScript for this theme -->
-    <script src="js/main.js"></script>
+    <script src="{{ asset('templates/plain') }}/js/main.js"></script>
 
   </body>
 
