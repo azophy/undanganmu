@@ -24,3 +24,14 @@ Route::domain('main.undangan-mu.herokuapp.com')->group(function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('admin')->group(function () {
+    Route::get('users', function () {
+        // Matches The "/admin/users" URL
+     });
+ });
+
+Route::get('/{site_url}', 'SiteController@display_site');
+
+
+
