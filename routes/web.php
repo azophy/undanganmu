@@ -25,8 +25,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('site', 'SiteController')->except(['show']);
+    Route::redirect('/',route('site.index'),301); // set default admin homepage
  });
 
 Route::get('/{site_url}', 'SiteController@display_site');
