@@ -20,6 +20,7 @@ class AddTableSite extends Migration
             $table->string('url_name',100);
             $table->string('page_title',100);
             $table->json('option');
+            $table->timestamps();
         });
     }
 

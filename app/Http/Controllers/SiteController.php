@@ -14,7 +14,9 @@ class SiteController extends Controller
      */
     public function index()
     {
-        //
+        return view('site.index', [
+            'sites' => Site::all(),
+        ]);
     }
 
     /**
@@ -24,7 +26,9 @@ class SiteController extends Controller
      */
     public function create()
     {
-        //
+        return view('site.create',[
+            'model' => new Site(),
+        ]);
     }
 
     /**
@@ -35,18 +39,12 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $input = Site::validate($request);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        if ($model = Site::create($input)) {
+            return redirect()->route('site.index')->with('status', 'Creating site "'.$model->url_name.'" succeed');
+        } else
+            return redirect()->route('site.create')->with('status', 'Error');
     }
 
     /**
@@ -55,9 +53,11 @@ class SiteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Site $site)
     {
-        //
+        return view('site.edit',[
+            'model' => $site,
+        ]);
     }
 
     /**
@@ -67,9 +67,14 @@ class SiteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Site $site)
     {
-        //
+        $input = Site::validate($request);
+
+        if ($site->update($input)) {
+            return redirect()->route('site.index')->with('status', 'Updating site "'.$site->url_name.'" succeed');
+        } else
+            return redirect()->route('site.edit', ['id' => $site->id])->with('status', 'Error');
     }
 
     /**
@@ -78,9 +83,13 @@ class SiteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Site $site)
     {
-        //
+        $url_name = $site->url_name;
+        if ($site->delete())
+            return redirect()->route('site.index')->with('status', 'Deleting site "'.$url_name.'" succeed');
+        else
+            return redirect()->route('site.index')->with('status', 'Deleting site "'.$url_name.'" failed');
     }
 
     /**

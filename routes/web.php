@@ -26,9 +26,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function () {
-    Route::get('users', function () {
-        // Matches The "/admin/users" URL
-     });
+    Route::resource('site', 'SiteController')->except(['show']);
  });
 
 Route::get('/{site_url}', 'SiteController@display_site');
