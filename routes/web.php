@@ -41,6 +41,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     // site management routes
     Route::resource('site', 'SiteController')->except(['show']);
+    Route::resource('template', 'TemplateController')->except(['show']);
     Route::redirect('/',route('site.index'),301); // set default admin homepage
  });
 

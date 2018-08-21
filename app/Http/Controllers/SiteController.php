@@ -102,7 +102,7 @@ class SiteController extends Controller
     {
         $site = Site::where('url_name',$url_name)->first();
         if ($site)
-            return view('templates.plain.index',[
+            return view($site->template->path, [
                 'site' => $site,
                 'info' => json_decode($site->option),
             ]);

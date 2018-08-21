@@ -36,7 +36,10 @@
                     <ul class="navbar-nav mr-auto">
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('site.index') }}">{{ __('Site Management') }}</a>
+                                <a class="nav-link" href="{{ route('site.index') }}">{{ __('Site') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('template.index') }}">{{ __('Template') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
