@@ -24,9 +24,9 @@
         </div>
     </div>
     <div class="form-group row">
-        <label for="id_template" class="col-md-3 col-form-label">Template Id</label>
+        <label for="id_template" class="col-md-3 col-form-label">Template</label>
         <div class="col-md-9">
-            <input type="text" class="form-control" id="id_template" name="id_template" value="{{ $model->id_template }}" placeholder="">
+            {!! Form::select('id_template', \App\Template::pluck('name','id'), $model->id_template, ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="form-group row">
