@@ -106,9 +106,7 @@ class SiteController extends Controller
                 'site' => $site,
                 'info' => json_decode($site->option),
             ]);
-        else if ($url_name == 'maryam-abit')
-            return view('templates.undanganmu.index');
         else
-            print 'Site name is :'.$url_name;
+            abort(404);
     }
 }
