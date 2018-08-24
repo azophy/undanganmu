@@ -12,10 +12,10 @@ Trait ConstantExportTrait
             $refl = new \ReflectionClass(__CLASS__);
             $constants = $refl->getConstants();
             $res = [];
-            $len = len($prefix);
+            $len = strlen($prefix);
             foreach ($constants as $key => $val)
-                if (substr(key, 0, $len) == $prefix)
-                    $res[] = $key;
+                if (substr($key, 0, $len) == $prefix)
+                    $res[$val] = substr($key, $len);
             static::$constant_list_ = $res;
         }
         return static::$constant_list_;

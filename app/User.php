@@ -17,12 +17,12 @@ class User extends Authenticatable
     const ROLE_USER  = 5;
     const ROLE_ADMIN = 10;
 
-    public $rule = [
-        'name'     => 'string',
-        'email'    => 'email',
+    static $rules = [
+        'name'     => 'string|required',
+        'email'    => 'email|required',
         'password' => 'string|nullable',
-        'username' => 'string',
-        'id_role'  => 'integer',
+        'username' => 'string|required',
+        'id_role'  => 'integer|required',
     ];
 
     /**
@@ -31,7 +31,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name'     ,
+        'email'    ,
+        'password' ,
+        'username' ,
+        'id_role'  ,
     ];
 
     /**
@@ -46,5 +50,14 @@ class User extends Authenticatable
     public function is($role) {
         $role_const = 'self::ROLE_'.strtoupper($role);
         return $this->id_role == constant($role_const);
+    }
+
+    public function role() {
+        $role_name = [
+            0  => 'guest',
+            5  => 'user',
+            10 => 'admin',
+        ];
+        return $role_name[$this->id_role];
     }
 }

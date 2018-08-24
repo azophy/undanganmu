@@ -29,10 +29,6 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 //Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
-    // Registration Routes...
-    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-    Route::post('register', 'Auth\RegisterController@register');
-
     // Password Reset Routes...
     Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
@@ -42,6 +38,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     // site management routes
     Route::resource('site', 'SiteController')->except(['show']);
     Route::resource('template', 'TemplateController')->except(['show']);
+    Route::resource('user', 'UserController')->except(['show']);
     Route::redirect('/',route('site.index'),301); // set default admin homepage
  });
 

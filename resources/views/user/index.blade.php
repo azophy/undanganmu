@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">Sites on undanganmu</div>
+    <div class="card-header">Users on undanganmu</div>
 
     <div class="card-body">
         @if (session('status'))
@@ -22,7 +22,7 @@
         @endif
 
         <p>
-            <a class="btn btn-primary" href="{{ route('template.create') }}">Add new</a>
+            <a class="btn btn-primary" href="{{ route('user.create') }}">Add new</a>
         </p>
 
         <table class="table">
@@ -30,18 +30,21 @@
                 <tr>
                     <th>No</th>
                     <th>Name</th>
-                    <th>Path</th>
-                    <th>Description</th>
+                    <th>User Name</th>
+                    <th>email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($templates as $template)
+                @foreach ($users as $user)
                 <tr>
                     <td></td>
-                    <td>{{ $template->name }}</td>
-                    <td>{{ $template->path }}</td>
-                    <td>{{ $template->description }}</td>
-                    <td> <a href="{{ route('template.edit',['id' => $template->id]) }}">Edit</a> / <a onclick="javascript:delete_element({{ $template->id }})" href="#">Delete</a> </td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->username }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->role() }}</td>
+                    <td> <a href="{{ route('user.edit',['id' => $user->id]) }}">Edit</a> / <a onclick="javascript:delete_element({{ $user->id }})" href="#">Delete</a> </td>
                 </tr>
                 @endforeach
             </tbody>

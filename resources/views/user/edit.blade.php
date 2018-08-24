@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">Edit Sites {{ $model->url_name }}</div>
+    <div class="card-header">Edit User {{ $model->name }}</div>
 
     <div class="card-body">
-        @include('site._form', [
+        @include('user._form', [
             'model' => $model, 
-            'target' => route('site.update', [
+            'target' => route('user.update', [
                 'id' => $model->id,
             ] ), 
             'method' => 'PUT',
