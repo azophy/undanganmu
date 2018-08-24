@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('templates.undanganmu.index');
+    return view('welcome');
 });
 
 Route::domain('main.undangan-mu.herokuapp.com')->group(function () {

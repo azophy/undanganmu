@@ -32,6 +32,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
+                            @if (\Auth::user()->is('admin'))
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('site.index') }}">{{ __('Site') }}</a>
                             </li>
@@ -40,6 +41,10 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('user.index') }}">{{ __('User') }}</a>
+                            </li>
+                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/profile') }}">{{ __('Profile') }}</a>
                             </li>
                         @endauth
                     </ul>
