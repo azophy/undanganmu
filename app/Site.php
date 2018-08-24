@@ -2,10 +2,13 @@
 
 namespace App;
 
-use App\BaseModel;
+use Illuminate\Database\Eloquent\Model;
+use App\ValidatorTrait;
 
-class Site extends BaseModel
+class Site extends Model 
 {
+    use ValidatorTrait;
+
     protected $table = 'site';
 
     static $rules = [

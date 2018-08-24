@@ -2,10 +2,13 @@
 
 namespace App;
 
-use App\BaseModel;
+use Illuminate\Database\Eloquent\Model;
+use App\ValidatorTrait;
 
-class Template extends BaseModel
+class Template extends Model 
 {
+    use ValidatorTrait;
+
     protected $table = 'template';
 
     static $rules = [
