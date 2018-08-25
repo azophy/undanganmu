@@ -43,8 +43,8 @@ class ModifyTableUser extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->string('password')->change();
             $table->dropColumn([
-                'password',
                 'username',
                 'id_role',
             ]);
