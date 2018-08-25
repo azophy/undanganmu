@@ -20,7 +20,7 @@ Route::domain('main.undangan-mu.herokuapp.com')->group(function () {
         return view('welcome_main');
     });
 });
-Route::domain('{site_url}.undangan-mu.herokuapp.com', 'SiteController@display_site')
+Route::domain('{site_url}.undangan-mu.herokuapp.com', 'SiteController@display_site');
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
