@@ -11,17 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// --------------- SUBDOMAIN ROUTES -----------------
+Route::group(['domain' => '{site_url}.'.env('ROOT_URL','undangan-mu.herokuapp.com')], function() {
+    Route::get('/', 'SiteController@display_site');
 });
 
-Route::domain('main.undangan-mu.herokuapp.com')->group(function () {
-    Route::get('/', function () {
-        return view('welcome_main');
-    });
-});
-Route::domain('{site_url}.undangan-mu.herokuapp.com', 'SiteController@display_site');
-
+// --------------- AUTHENTIFICATION ROUTES -----------------
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
@@ -33,8 +28,7 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-//Route::get('/home', 'HomeController@index')->name('home');
-
+// --------------- ADMIN AREA ROUTES -----------------
 Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
     // site management routes
     Route::resource('site', 'SiteController')->except(['show']);
@@ -43,7 +37,7 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
     Route::redirect('/',route('site.index'),301); // set default admin homepage
  });
 
+// --------------- TOP LEVEL ROUTES -----------------
+Route::get('/', function () { return view('welcome'); });
 Route::get('/{site_url}', 'SiteController@display_site');
-
-
 
