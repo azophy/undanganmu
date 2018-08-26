@@ -15,6 +15,12 @@
 Route::group(['domain' => '{site_url}.'.env('ROOT_URL','undangan-mu.herokuapp.com')], function() {
     Route::get('/', 'SiteController@display_site');
 });
+Route::group(['domain' => '{site_url}.undangan.mu'], function() {
+    Route::get('/', 'SiteController@display_site');
+});
+Route::group(['domain' => '{site_url}.ngundangkamu.co'], function() {
+    Route::get('/', 'SiteController@display_site');
+});
 
 // --------------- AUTHENTIFICATION ROUTES -----------------
 // Authentication Routes...
