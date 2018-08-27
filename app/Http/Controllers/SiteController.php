@@ -70,6 +70,7 @@ class SiteController extends Controller
     public function update(Request $request, Site $site)
     {
         $input = Site::validate($request);
+        $input['option'] = json_encode($request->input('option_data'));
 
         if ($site->update($input)) {
             return redirect()->route('site.index')->with('status', 'Updating site "'.$site->url_name.'" succeed');

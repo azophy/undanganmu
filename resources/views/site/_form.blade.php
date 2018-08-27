@@ -15,10 +15,10 @@
 @endif
 
 <?php
-function print_json($data, $prefix=[]) {
+function print_option($data, $prefix=[]) {
     foreach ($data as $key => $val) {
         if (is_array($val) || is_object($val))
-            print_json($val, array_merge($prefix, [$key]));
+            print_option($val, array_merge($prefix, [$key]));
         else {
             $name = 'option_data'; 
             $id = 'option_data'; 
@@ -79,7 +79,9 @@ function print_json($data, $prefix=[]) {
 --}}
     <hr/>
     <label for="">Options</label>
-    <?php print_json($model->option_data) ?>
+<?php if (!empty($model->option)) 
+print_option($model->option_data); 
+else print_option($model::$option_default) ?>
     <div class="form-group row">
         <div class="col-md-9 offset-md-3">
             <button type="submit" class="btn btn-primary">Save</button>

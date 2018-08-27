@@ -10,6 +10,8 @@ class Site extends Model
 {
     use ValidatorTrait;
 
+    const DATE_FORMAT = 'd m Y'; // PHP's date format
+
     private $_option=[], $_date_format=null;
     protected $table = 'site';
 
@@ -26,6 +28,39 @@ class Site extends Model
         'url_name',
         'page_title',
         'option',
+    ];
+
+    /* Default value for site options */
+    static $option_default = [
+        "names" => [
+            "bride" => "",
+            "bride_full" => "",
+            "groom" => "",
+            "groom_full" => "",
+            "bride_father" => "",
+            "bride_mother" => "",
+            "groom_father" => "",
+            "groom_mother" => "",
+        ],
+        "event" => [
+            "main_title" => "",
+            "date" => "17-8-1945",
+            "location" => [
+                "address" => "",
+                "city" => "",
+                "country" => "",
+                "coordinate" => "",
+            ],
+            "1" => [
+                "title" => "Akad Nikah",
+                "time" => "8.00-10.00",
+            ],
+            "2" => [
+                "title" => "Resepsi",
+                "time" => "11.00-13.00",
+            ],
+        ],
+        "template_specific" => "",
     ];
 
     // ------------------- CUSTOM MUTATOR --------------------
