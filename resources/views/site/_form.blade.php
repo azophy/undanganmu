@@ -14,6 +14,34 @@
     </div>
 @endif
 
+<?php
+function print_json($data, $prefix=[]) {
+    foreach ($data as $key => $val) {
+        if (is_array($val) || is_object($val))
+            print_json($val, array_merge($prefix, [$key]));
+        else {
+            $name = 'option_data'; 
+            $id = 'option_data'; 
+            $label='';
+            foreach (array_merge($prefix, [$key]) as $index => $item) {
+                $name.='['.$item.']';
+                $id .= '_'.$item;
+                if ($index > 0) $label.= '->';
+                $label .= ucfirst($item);
+            } 
+            ?>
+    <div class="form-group row">
+        <label for="<?=$id?>" class="col-md-3 col-form-label"><?=$label?></label>
+        <div class="col-md-9">
+            <input type="text" class="form-control" id="<?=$id?>" name="<?=$name?>" value="<?=$val?>" placeholder="">
+        </div>
+    </div>
+<?php
+        }
+    }
+} ?>
+
+
 <form class="form" action="{{ $target }}" method="POST">
     @method($method)
     @csrf
@@ -41,12 +69,17 @@
             <input type="text" class="form-control" id="page_title" name="page_title" value="{{ $model->page_title }}" placeholder="">
         </div>
     </div>
+{{--
     <div class="form-group row">
         <label for="option" class="col-md-3 col-form-label">Options</label>
         <div class="col-md-9">
             <textarea class="form-control" id="option" name="option" rows="5">{{ $model->option }}</textarea>
         </div>
     </div>
+--}}
+    <hr/>
+    <label for="">Options</label>
+    <?php print_json($model->option_data) ?>
     <div class="form-group row">
         <div class="col-md-9 offset-md-3">
             <button type="submit" class="btn btn-primary">Save</button>
