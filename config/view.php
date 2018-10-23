@@ -14,6 +14,7 @@ return [
     */
 
     'paths' => [
+        storage_path('app/templates'),
         resource_path('views'),
     ],
 

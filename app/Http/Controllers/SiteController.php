@@ -40,6 +40,7 @@ class SiteController extends Controller
     public function store(Request $request)
     {
         $input = Site::validate($request);
+        $input['option'] = json_encode($request->input('option_data'));
 
         if ($model = Site::create($input)) {
             return redirect()->route('site.index')->with('status', 'Creating site "'.$model->url_name.'" succeed');

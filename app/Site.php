@@ -32,36 +32,40 @@ class Site extends Model
 
     /* Default value for site options */
     static $option_default = [
-        "names" => [
-            "bride" => "",
-            "bride_full" => "",
-            "groom" => "",
-            "groom_full" => "",
-            "bride_father" => "",
-            "bride_mother" => "",
-            "groom_father" => "",
-            "groom_mother" => "",
-        ],
-        "event" => [
-            "main_title" => "",
-            "date" => "17-8-1945",
-            "location" => [
-                "address" => "",
-                "city" => "",
-                "country" => "",
-                "coordinate" => "",
-            ],
-            "1" => [
-                "title" => "Akad Nikah",
-                "time" => "8.00-10.00",
-            ],
-            "2" => [
-                "title" => "Resepsi",
-                "time" => "11.00-13.00",
-            ],
-        ],
-        "template_specific" => "",
+        "bride_short_name"      => "",
+        "bride_full_name"       => "",
+        "groom_short_name"      => "",
+        "groom_full_name"       => "",
+        "bride_father_name"     => "",
+        "bride_mother_name"     => "",
+        "groom_father_name"     => "",
+        "groom_mother_name"     => "",
+        "event_title"           => "Fulanah & Fulan",
+        "event_date"            => "17-8-1945",
+        "event_loc_1_name"      => "Gedung ABC",
+        "event_loc_1_city"      => "Kota Bandung",
+        "event_loc_1_address"   => "Jl. Jalan no 1",
+        "event_loc_1_lat"       => "",
+        "event_loc_1_long"      => "",
+        "event_loc_same"        => true,
+        "event_loc_2_name"      => "Gedung DEF",
+        "event_loc_2_city"      => "Kota Bandung",
+        "event_loc_2_address"   => "Jl. Jalan no. 1",
+        "event_loc_2_lat"       => "",
+        "event_loc_2_long"      => "",
+        "event_1_title"         => "Akad Nikah",
+        "event_1_time"          => "8.00-10.00",
+        "event_2_title"         => "Resepsi",
+        "event_2_time"          => "11.00-13.00",
+        "template_specific"     => "",
     ];
+
+    // ------------------- METHODS --------------------
+    public function __construct(array $attributes = []) {
+        $this->option = json_encode(self::$option_default);
+     
+        parent::__construct($attributes);
+    } 
 
     // ------------------- CUSTOM MUTATOR --------------------
     public function getOptionDataAttribute() {
