@@ -31,6 +31,15 @@ Route::get('/social/redirect/{provider}',   ['as' => $s . 'redirect',   'uses' =
 Route::get('/social/handle/{provider}',     ['as' => $s . 'handle',     'uses' => 'Auth\LoginController@getSocialHandle']);
 
 
+// --------------- MEMBER AREA ROUTES -----------------
+Route::prefix('member')->name('member.')->namespace('Member')->middleware(['auth'])->group(function () {
+    Route::get('index', 'MainController@index')->name('index');
+    Route::get('profile', 'MainController@edit_profile')->name('edit_profile');
+    Route::post('profile', 'MainController@update_profile')->name('update_profile');
+    Route::get('site', 'MainController@edit_site')->name('edit_site');
+    Route::post('site', 'MainController@update_site')->name('update_site');
+ });
+
 // --------------- ADMIN AREA ROUTES -----------------
 Route::prefix('admin')->name('admin.')->namespace('Admin')->middleware(['auth','admin'])->group(function () {
     // site management routes 

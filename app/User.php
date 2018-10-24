@@ -60,4 +60,9 @@ class User extends Authenticatable
         ];
         return $role_name[$this->id_role];
     }
+
+    // ---------------------------------
+    public function site() {
+        return $this->hasMany('App\Site', 'id_user');
+    }
 }

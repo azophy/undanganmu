@@ -8,6 +8,7 @@ use App\Template;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -72,14 +73,18 @@ class RegisterController extends Controller
         ]);
         $input['password'] = Hash::make($input['password']);
 
-        if ($model = User::create($input)) {
+        if ($user = User::create($input)) {
             if ($site = Site::create([
-                'id_user'     => $model->id,
+                'id_user'     => $user->id,
                 'id_template' => env('DEFAULT_TEMPLATE_ID'),
                 'url_name'    => $input['url_name'],
                 'option'      => json_encode(Site::$option_default),
-            ]))
-                return redirect()->route('member.site')->with('status', 'Welcome "'.$model->url_name.'"! Now lets prepare your site. Fill the form below');
+            ])) {
+
+                Auth::login($user);
+
+                return redirect()->route('member.edit_site')->with('status', 'Welcome "'.$user->name.'"! Now lets prepare your site. Fill the form below');
+            }
         }
         return redirect()->route('register')->with('status', 'Error');
 
