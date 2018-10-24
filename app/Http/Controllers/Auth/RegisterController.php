@@ -65,7 +65,9 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-        $input = User::validate($request);
+        $input = User::validate($request,[
+            'url_name' => 'string|required|unique:site,url_name',
+        ]);
         $input['password'] = Hash::make($input['password']);
 
         if ($model = User::create($input)) {

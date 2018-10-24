@@ -91,6 +91,23 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="url_name" class="col-md-4 col-form-label text-md-right">{{ __('Desired Url Name') }}</label>
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="url-addon-1">undangan.mu/</span>
+                                  </div>
+                                  <input type="text" class="form-control{{ $errors->has('url_name') ? ' is-invalid' : '' }}" id="url_name" name="url_name" value="{{ old('url_name') }}" placeholder="" aria-describedby="url-addon-1">
+                                </div>
+                                @if ($errors->has('url_name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('url_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
