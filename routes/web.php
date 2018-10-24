@@ -23,8 +23,13 @@ Route::group(['domain' => '{site_url}.ngundangkamu.co'], function() {
 });
 
 // --------------- AUTHENTIFICATION ROUTES -----------------
-
 Route::auth();
+
+// ---------------- SOCIALITE PAGE ROUTES ---------------
+$s = 'social.';
+Route::get('/social/redirect/{provider}',   ['as' => $s . 'redirect',   'uses' => 'Auth\LoginController@getSocialRedirect']);
+Route::get('/social/handle/{provider}',     ['as' => $s . 'handle',     'uses' => 'Auth\LoginController@getSocialHandle']);
+
 
 // --------------- ADMIN AREA ROUTES -----------------
 Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
