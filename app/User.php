@@ -21,8 +21,8 @@ class User extends Authenticatable
         'name'     => 'string|required',
         'email'    => 'email|required',
         'password' => 'string|nullable',
-        'username' => 'string|required',
-        'id_role'  => 'integer|required',
+        'username' => 'string|required|unique:users',
+        'id_role'  => 'integer|default|'.self::ROLE_GUEST,
     ];
 
     /**
