@@ -8,6 +8,8 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
+                    @if ($has_socmed_login)
+
                     <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                         @csrf
 
@@ -29,7 +31,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email', $socmed_login_email) }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
@@ -69,6 +71,11 @@
                             </div>
                         </div>
                     </form>
+                    @else
+                    <p class="text-center">
+                        <a class="btn btn-success" href="{{ url('/social/redirect/google') }}">Daftar dengan akun Google anda!</a>
+                    </p>
+                    @endif
                 </div>
             </div>
         </div>

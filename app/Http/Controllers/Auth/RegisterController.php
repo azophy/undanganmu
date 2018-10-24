@@ -69,4 +69,24 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $user_info = session('user_info',null);
+
+        if ($user_info != null && $user_info->email) { 
+            $params['has_socmed_login'] = true;
+            $params['socmed_login_name'] = ($user_info->name) ?: '';
+            $params['socmed_login_email'] = $user_info->email;
+        } else {
+            $params['has_socmed_login'] = false;
+        }
+
+        return view('auth.register', $params);
+    }
 }
