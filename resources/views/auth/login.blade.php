@@ -57,6 +57,8 @@
                                     {{ __('Login') }}
                                 </button>
 
+                                <a class="btn btn-success" href="{{ url('/social/redirect/google') }}">Masuk dengan akun Google</a>
+
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
 use Auth;
 use Socialite;
 
@@ -69,9 +71,16 @@ class LoginController extends Controller
 
         $user = Socialite::driver( $provider )->user();
 
-        session(['user_info' => $user]);
+        // if email exist, login. else register
+        $find_user = User::where('email', $user->email)->first();
+        if ($find_user == null) {
+            session(['user_info' => $user]);
+            return redirect('/register');
+        } else {
+            Auth::login($find_user);
+            return redirect('/');
+        }
 
-        return redirect('/');
     }
 
 
