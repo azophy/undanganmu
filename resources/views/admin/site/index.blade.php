@@ -41,7 +41,7 @@
                     <td></td>
                     <td>{{ $site->id_user }}</td>
                     <td>{{ $site->url_name }}</td>
-                    <td>{{ $site->page_title }}</td>
+                    <td>{{ $site->option_data->event_title }}</td>
                     <td> <a href="{{ route('admin.site.edit',['id' => $site->id]) }}">Edit</a> / <a onclick="javascript:delete_element({{ $site->id }})" href="#">Delete</a> </td>
                 </tr>
                 @endforeach

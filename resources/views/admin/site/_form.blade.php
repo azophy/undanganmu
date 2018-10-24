@@ -63,13 +63,13 @@ function print_option($data, $prefix=[]) {
             <input type="text" class="form-control" id="url_name" name="url_name" value="{{ $model->url_name }}" placeholder="">
         </div>
     </div>
+    {{--
     <div class="form-group row">
         <label for="page_title" class="col-md-3 col-form-label">Page Title</label>
         <div class="col-md-9">
             <input type="text" class="form-control" id="page_title" name="page_title" value="{{ $model->page_title }}" placeholder="">
         </div>
     </div>
-{{--
     <div class="form-group row">
         <label for="option" class="col-md-3 col-form-label">Options</label>
         <div class="col-md-9">
