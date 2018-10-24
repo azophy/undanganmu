@@ -1,0 +1,3 @@
+[submodule "storage/app/templates/plain"]
+	path = storage/app/templates/plain
+	url = https://azophy:neS7BySdmDFrby9xC-JQ@gitlab.com/azophy/undanganmu-template-plain.git
