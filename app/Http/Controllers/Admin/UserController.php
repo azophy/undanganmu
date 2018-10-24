@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
 use App\User;
 
 class UserController extends Controller
@@ -15,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.index', [
+        return view('admin.user.index', [
             'users' => User::all(),
         ]);
     }
@@ -27,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create',[
+        return view('admin.user.create',[
             'model' => new User(),
         ]);
     }
@@ -44,9 +45,9 @@ class UserController extends Controller
         $input['password'] = Hash::make($input['password']);
 
         if ($model = User::create($input)) {
-            return redirect()->route('user.index')->with('status', 'Creating user "'.$model->url_name.'" succeed');
+            return redirect()->route('admin.user.index')->with('status', 'Creating user "'.$model->url_name.'" succeed');
         } else
-            return redirect()->route('user.create')->with('status', 'Error');
+            return redirect()->route('admin.user.create')->with('status', 'Error');
     }
 
     /**
@@ -57,7 +58,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.edit',[
+        return view('admin.user.edit',[
             'model' => $user,
         ]);
     }
@@ -76,9 +77,9 @@ class UserController extends Controller
             $input['password'] = Hash::make($input['password']);
 
         if ($user->update($input)) {
-            return redirect()->route('user.index')->with('status', 'Updating user "'.$user->url_name.'" succeed');
+            return redirect()->route('admin.user.index')->with('status', 'Updating user "'.$user->url_name.'" succeed');
         } else
-            return redirect()->route('user.edit', ['id' => $user->id])->with('status', 'Error');
+            return redirect()->route('admin.user.edit', ['id' => $user->id])->with('status', 'Error');
     }
 
     /**
@@ -91,8 +92,8 @@ class UserController extends Controller
     {
         $url_name = $user->url_name;
         if ($user->delete())
-            return redirect()->route('user.index')->with('status', 'Deleting user "'.$url_name.'" succeed');
+            return redirect()->route('admin.user.index')->with('status', 'Deleting user "'.$url_name.'" succeed');
         else
-            return redirect()->route('user.index')->with('status', 'Deleting user "'.$url_name.'" failed');
+            return redirect()->route('admin.user.index')->with('status', 'Deleting user "'.$url_name.'" failed');
     }
 }

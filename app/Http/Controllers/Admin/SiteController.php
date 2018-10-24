@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Site;
 
 class SiteController extends Controller
@@ -14,7 +15,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        return view('site.index', [
+        return view('admin.site.index', [
             'sites' => Site::all(),
         ]);
     }
@@ -26,7 +27,7 @@ class SiteController extends Controller
      */
     public function create()
     {
-        return view('site.create',[
+        return view('admin.site.create',[
             'model' => new Site(),
         ]);
     }
@@ -43,9 +44,9 @@ class SiteController extends Controller
         $input['option'] = json_encode($request->input('option_data'));
 
         if ($model = Site::create($input)) {
-            return redirect()->route('site.index')->with('status', 'Creating site "'.$model->url_name.'" succeed');
+            return redirect()->route('admin.site.index')->with('status', 'Creating site "'.$model->url_name.'" succeed');
         } else
-            return redirect()->route('site.create')->with('status', 'Error');
+            return redirect()->route('admin.site.create')->with('status', 'Error');
     }
 
     /**
@@ -56,7 +57,7 @@ class SiteController extends Controller
      */
     public function edit(Site $site)
     {
-        return view('site.edit',[
+        return view('admin.site.edit',[
             'model' => $site,
         ]);
     }
@@ -74,9 +75,9 @@ class SiteController extends Controller
         $input['option'] = json_encode($request->input('option_data'));
 
         if ($site->update($input)) {
-            return redirect()->route('site.index')->with('status', 'Updating site "'.$site->url_name.'" succeed');
+            return redirect()->route('admin.site.index')->with('status', 'Updating site "'.$site->url_name.'" succeed');
         } else
-            return redirect()->route('site.edit', ['id' => $site->id])->with('status', 'Error');
+            return redirect()->route('admin.site.edit', ['id' => $site->id])->with('status', 'Error');
     }
 
     /**
@@ -89,26 +90,8 @@ class SiteController extends Controller
     {
         $url_name = $site->url_name;
         if ($site->delete())
-            return redirect()->route('site.index')->with('status', 'Deleting site "'.$url_name.'" succeed');
+            return redirect()->route('admin.site.index')->with('status', 'Deleting site "'.$url_name.'" succeed');
         else
-            return redirect()->route('site.index')->with('status', 'Deleting site "'.$url_name.'" failed');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function display_site($url_name)
-    {
-        $site = Site::where('url_name',$url_name)->first();
-        if ($site)
-            return view($site->template->path, [
-                'site' => $site,
-                'info' => json_decode($site->option),
-            ]);
-        else
-            abort(404);
+            return redirect()->route('admin.site.index')->with('status', 'Deleting site "'.$url_name.'" failed');
     }
 }

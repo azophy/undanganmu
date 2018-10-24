@@ -5,9 +5,9 @@
     <div class="card-header">Create new Template</div>
 
     <div class="card-body">
-        @include('template._form', [
+        @include('admin.template._form', [
             'model' => $model, 
-            'target' => route('template.store') , 
+            'target' => route('admin.template.store') , 
             'method' => 'POST',
         ])
     </div>

@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">Create new User</div>
+    <div class="card-header">Create new Sites</div>
 
     <div class="card-body">
-        @include('user._form', [
+        @include('admin.site._form', [
             'model' => $model, 
-            'target' => route('user.store') , 
+            'target' => route('admin.site.store') , 
             'method' => 'POST',
         ])
     </div>

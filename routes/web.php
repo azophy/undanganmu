@@ -13,13 +13,13 @@
 
 // --------------- SUBDOMAIN ROUTES -----------------
 Route::group(['domain' => '{site_url}.'.env('ROOT_URL','undangan-mu.herokuapp.com')], function() {
-    Route::get('/', 'SiteController@display_site');
+    Route::get('/', 'MainController@display_site');
 });
 Route::group(['domain' => '{site_url}.undangan.mu'], function() {
-    Route::get('/', 'SiteController@display_site');
+    Route::get('/', 'MainController@display_site');
 });
 Route::group(['domain' => '{site_url}.ngundangkamu.co'], function() {
-    Route::get('/', 'SiteController@display_site');
+    Route::get('/', 'MainController@display_site');
 });
 
 // --------------- AUTHENTIFICATION ROUTES -----------------
@@ -32,15 +32,15 @@ Route::get('/social/handle/{provider}',     ['as' => $s . 'handle',     'uses' =
 
 
 // --------------- ADMIN AREA ROUTES -----------------
-Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
-    // site management routes
+Route::prefix('admin')->name('admin.')->namespace('Admin')->middleware(['auth','admin'])->group(function () {
+    // site management routes 
     Route::resource('site', 'SiteController')->except(['show']);
     Route::resource('template', 'TemplateController')->except(['show']);
     Route::resource('user', 'UserController')->except(['show']);
-    Route::redirect('/',route('site.index'),301); // set default admin homepage
+    Route::redirect('/',route('admin.site.index'),301); // set default admin homepage
  });
 
 // --------------- TOP LEVEL ROUTES -----------------
 Route::get('/', function () { return view('welcome'); });
-Route::get('/{site_url}', 'SiteController@display_site');
+Route::get('/{site_url}', 'MainController@display_site');
 

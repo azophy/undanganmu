@@ -22,26 +22,27 @@
         @endif
 
         <p>
-            <a class="btn btn-primary" href="{{ route('template.create') }}">Add new</a>
+            <a class="btn btn-primary" href="{{ route('admin.site.create') }}">Add new</a>
         </p>
 
         <table class="table">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Name</th>
-                    <th>Path</th>
-                    <th>Description</th>
+                    <th>User</th>
+                    <th>Url Name</th>
+                    <th>Title</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($templates as $template)
+                @foreach ($sites as $site)
                 <tr>
                     <td></td>
-                    <td>{{ $template->name }}</td>
-                    <td>{{ $template->path }}</td>
-                    <td>{{ $template->description }}</td>
-                    <td> <a href="{{ route('template.edit',['id' => $template->id]) }}">Edit</a> / <a onclick="javascript:delete_element({{ $template->id }})" href="#">Delete</a> </td>
+                    <td>{{ $site->id_user }}</td>
+                    <td>{{ $site->url_name }}</td>
+                    <td>{{ $site->page_title }}</td>
+                    <td> <a href="{{ route('admin.site.edit',['id' => $site->id]) }}">Edit</a> / <a onclick="javascript:delete_element({{ $site->id }})" href="#">Delete</a> </td>
                 </tr>
                 @endforeach
             </tbody>

@@ -34,17 +34,17 @@
                         @auth
                             @if (\Auth::user()->is('admin'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('site.index') }}">{{ __('Site') }}</a>
+                                <a class="nav-link" href="{{ route('admin.site.index') }}">{{ __('Site') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('template.index') }}">{{ __('Template') }}</a>
+                                <a class="nav-link" href="{{ route('admin.template.index') }}">{{ __('Template') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">{{ __('User') }}</a>
+                                <a class="nav-link" href="{{ route('admin.user.index') }}">{{ __('User') }}</a>
                             </li>
                             @endif
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/profile') }}">{{ __('Profile') }}</a>
+                                <a class="nav-link" href="{{ url('/member/profile') }}">{{ __('Profile') }}</a>
                             </li>
                         @endauth
                     </ul>

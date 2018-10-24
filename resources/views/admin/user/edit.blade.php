@@ -5,9 +5,9 @@
     <div class="card-header">Edit User {{ $model->name }}</div>
 
     <div class="card-body">
-        @include('user._form', [
+        @include('admin.user._form', [
             'model' => $model, 
-            'target' => route('user.update', [
+            'target' => route('admin.user.update', [
                 'id' => $model->id,
             ] ), 
             'method' => 'PUT',

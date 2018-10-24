@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Template;
 
 class TemplateController extends Controller
@@ -14,7 +15,7 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        return view('template.index', [
+        return view('admin.template.index', [
             'templates' => Template::all(),
         ]);
     }
@@ -26,7 +27,7 @@ class TemplateController extends Controller
      */
     public function create()
     {
-        return view('template.create',[
+        return view('admin.template.create',[
             'model' => new Template(),
         ]);
     }
@@ -42,9 +43,9 @@ class TemplateController extends Controller
         $input = Template::validate($request);
 
         if ($model = Template::create($input)) {
-            return redirect()->route('template.index')->with('status', 'Creating template "'.$model->name.'" succeed');
+            return redirect()->route('admin.template.index')->with('status', 'Creating template "'.$model->name.'" succeed');
         } else
-            return redirect()->route('template.create')->with('status', 'Error');
+            return redirect()->route('admin.template.create')->with('status', 'Error');
     }
 
     /**
@@ -55,7 +56,7 @@ class TemplateController extends Controller
      */
     public function edit(Template $template)
     {
-        return view('template.edit',[
+        return view('admin.template.edit',[
             'model' => $template,
         ]);
     }
@@ -72,9 +73,9 @@ class TemplateController extends Controller
         $input = Template::validate($request);
 
         if ($template->update($input)) {
-            return redirect()->route('template.index')->with('status', 'Updating template "'.$template->name.'" succeed');
+            return redirect()->route('admin.template.index')->with('status', 'Updating template "'.$template->name.'" succeed');
         } else
-            return redirect()->route('template.edit', ['id' => $template->id])->with('status', 'Error');
+            return redirect()->route('admin.template.edit', ['id' => $template->id])->with('status', 'Error');
     }
 
     /**
@@ -87,9 +88,9 @@ class TemplateController extends Controller
     {
         $name = $template->name;
         if ($template->delete())
-            return redirect()->route('template.index')->with('status', 'Deleting template "'.$name.'" succeed');
+            return redirect()->route('admin.template.index')->with('status', 'Deleting template "'.$name.'" succeed');
         else
-            return redirect()->route('template.index')->with('status', 'Deleting template "'.$name.'" failed');
+            return redirect()->route('admin.template.index')->with('status', 'Deleting template "'.$name.'" failed');
     }
 
 }

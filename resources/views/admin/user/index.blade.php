@@ -22,7 +22,7 @@
         @endif
 
         <p>
-            <a class="btn btn-primary" href="{{ route('user.create') }}">Add new</a>
+            <a class="btn btn-primary" href="{{ route('admin.user.create') }}">Add new</a>
         </p>
 
         <table class="table">
@@ -44,7 +44,7 @@
                     <td>{{ $user->username }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role() }}</td>
-                    <td> <a href="{{ route('user.edit',['id' => $user->id]) }}">Edit</a> / <a onclick="javascript:delete_element({{ $user->id }})" href="#">Delete</a> </td>
+                    <td> <a href="{{ route('admin.user.edit',['id' => $user->id]) }}">Edit</a> / <a onclick="javascript:delete_element({{ $user->id }})" href="#">Delete</a> </td>
                 </tr>
                 @endforeach
             </tbody>
