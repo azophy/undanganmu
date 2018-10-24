@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Site;
+use App\Template;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -71,9 +73,15 @@ class RegisterController extends Controller
         $input['password'] = Hash::make($input['password']);
 
         if ($model = User::create($input)) {
-            return redirect()->route('member.site')->with('status', 'Welcome "'.$model->url_name.'"! Now lets prepare your site. Fill the form below');
-        } else
-            return redirect()->route('register')->with('status', 'Error');
+            if ($site = Site::create([
+                'id_user'     => $model->id,
+                'id_template' => env('DEFAULT_TEMPLATE_ID'),
+                'url_name'    => $input['url_name'],
+                'option'      => json_encode(Site::$option_default),
+            ]))
+                return redirect()->route('member.site')->with('status', 'Welcome "'.$model->url_name.'"! Now lets prepare your site. Fill the form below');
+        }
+        return redirect()->route('register')->with('status', 'Error');
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
