@@ -22,7 +22,8 @@ function asset_url($param) {
     <link href="{{ asset_url('templates/undanganmu') }}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="{{ asset_url('templates/undanganmu') }}/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- <link href="{{ asset_url('templates/undanganmu') }}/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
@@ -84,7 +85,7 @@ function asset_url($param) {
           </div>
           <div class="col-lg-8 mx-auto">
             <p class="text-faded mb-5">Undangan.mu membantu kamu untuk membuat undangan digital yang berkesan, dengan mudah, cepat, dan murah!</p>
-            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
+            <a class="btn btn-primary btn-xl js-scroll-trigger" href="{{ url('/social/redirect/google') }}"><i class="fab fa-google"></i> &nbsp; Daftar dengan akun Google anda!</a>
           </div>
         </div>
       </div>

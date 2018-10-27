@@ -56,12 +56,18 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
-
-                                <a class="btn btn-success" href="{{ url('/social/redirect/google') }}">Masuk dengan akun Google</a>
-
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
+
+                                <hr/>
+                                <div class="text-center">
+
+                                    <p>{{ __('or') }}</p>
+
+                                    <a class="text-center btn btn-success" href="{{ url('/social/redirect/google') }}"><i class="fab fa-google"></i> &nbsp; {{__('Login with google') }}</a>
+
+                                </div>
                             </div>
                         </div>
                     </form>

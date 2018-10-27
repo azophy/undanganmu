@@ -118,7 +118,7 @@
                     </form>
                     @else
                     <p class="text-center">
-                        <a class="btn btn-success" href="{{ url('/social/redirect/google') }}">Daftar dengan akun Google anda!</a>
+                        <a class="btn btn-success" href="{{ url('/social/redirect/google') }}"><i class="fab fa-google"></i> &nbsp; Daftar dengan akun Google anda!</a>
                     </p>
                     @endif
                 </div>
