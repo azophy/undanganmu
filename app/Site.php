@@ -76,7 +76,7 @@ class Site extends Model
 
     public function getDateFormatAttribute() {
         if (empty($this->_date_format))
-            $this->_date_format = Carbon::createFromFormat('d-m-Y',$this->option_data->date);
+            $this->_date_format = Carbon::createFromFormat('d-m-Y',$this->option_data->event_date);
         return $this->_date_format;
     } 
 
