@@ -72,6 +72,7 @@ class RegisterController extends Controller
             'url_name' => 'string|required|unique:site,url_name',
         ]);
         $input['password'] = Hash::make($input['password']);
+        $input['info'] = json_encode($request->input('info_data'));
 
         if ($user = User::create($input)) {
             if ($site = Site::create([
