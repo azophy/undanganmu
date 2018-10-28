@@ -42,10 +42,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $input = User::validate($request);
-        $input['password'] = Hash::make($input['password']);
+        $input['password'] = Hash::make($input['new_password']);
+        $input['info'] = json_encode($request->input('info_data'));
 
         if ($model = User::create($input)) {
-            return redirect()->route('admin.user.index')->with('status', 'Creating user "'.$model->url_name.'" succeed');
+            return redirect()->route('admin.user.index')->with('status', 'Creating user "'.$model->username.'" succeed');
         } else
             return redirect()->route('admin.user.create')->with('status', 'Error');
     }
@@ -72,12 +73,13 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $input = User::validate($request);
-        if (!empty($input['password']))
-            $input['password'] = Hash::make($input['password']);
+        $input = User::validate($request, [], $user);
+        $input['info'] = json_encode($request->input('info_data'));
+        if (!empty($input['new_password']))
+            $input['password'] = Hash::make($input['new_password']);
 
         if ($user->update($input)) {
-            return redirect()->route('admin.user.index')->with('status', 'Updating user "'.$user->url_name.'" succeed');
+            return redirect()->route('admin.user.index')->with('status', 'Updating user "'.$user->username.'" succeed');
         } else
             return redirect()->route('admin.user.edit', ['id' => $user->id])->with('status', 'Error');
     }
@@ -90,10 +92,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $url_name = $user->url_name;
+        $username = $user->username;
         if ($user->delete())
-            return redirect()->route('admin.user.index')->with('status', 'Deleting user "'.$url_name.'" succeed');
+            return redirect()->route('admin.user.index')->with('status', 'Deleting user "'.$username.'" succeed');
         else
-            return redirect()->route('admin.user.index')->with('status', 'Deleting user "'.$url_name.'" failed');
+            return redirect()->route('admin.user.index')->with('status', 'Deleting user "'.$username.'" failed');
     }
 }

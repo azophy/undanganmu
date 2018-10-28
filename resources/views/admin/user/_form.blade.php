@@ -34,7 +34,7 @@
         <label for="password" class="col-md-3 col-form-label">{{ (!empty($model->password)) ? 'New ' : '' }}Password</label>
         <div class="col-md-9">
             <div class="input-group">
-              <input type="password" class="form-control" id="password" name="password" value="" placeholder="">
+              <input type="password" class="form-control" id="password" name="new_password" value="" placeholder="">
               <span class="input-group-btn">
                 <button class="btn btn-secondary" id="show-password" type="button"><i class="far fa-eye"></i></button>
               </span>
@@ -54,6 +54,20 @@
             {!! Form::select('id_role', \App\User::listConstants('ROLE_'), $model->id_role, ['class' => 'form-control']) !!}
         </div>
     </div>
+
+    <div class="form-group row">
+        <label for="url_name" class="col-md-4 col-form-label text-md-right">{{ __('Contact Number') }}</label>
+        <div class="col-md-6">
+            <input type="text" class="form-control" id="info_data_contact_number" name="info_data[contact_number]" value="{{ (!empty($model->info_data)) ? $model->info_data->contact_number : '' }}" placeholder="">
+
+            @if ($errors->has('info_data[contact_number]'))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('info_data[contact_number]') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+
     <div class="form-group row">
         <div class="col-md-9 offset-md-3">
             <button type="submit" class="btn btn-primary">Save</button>

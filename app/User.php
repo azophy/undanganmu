@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Validation\Rule;
 use App\ValidatorTrait;
 use App\ConstantExportTrait;
 
@@ -17,13 +18,31 @@ class User extends Authenticatable
     const ROLE_USER  = 5;
     const ROLE_ADMIN = 10;
 
-    static $rules = [
-        'name'     => 'string|required',
-        'email'    => 'email|required',
-        'password' => 'string|nullable',
-        'username' => 'string|required|unique:users',
-        'id_role'  => 'integer|default|'.self::ROLE_GUEST,
-    ];
+    private $_info=[]; // variabel untuk menyimpan data info user yg sudah berupa object
+
+    static function rules($model=null) {
+        $rules = [
+            'name'     => 'string|required',
+            'email'    => 'email|required',
+            'password' => 'string|nullable',
+            'username' => 'string|required|unique:users,username',
+            'id_role'  => 'integer|nullable',
+            'info'     => 'string|nullable',
+
+            'info_data.contact_number.' => 'digits:10,14',
+            'new_password' => 'string|nullable',
+        ];
+
+        // custom rules for updating models
+        if ($model != null)
+            $rules['username'] .= ','.$model->id;
+
+        return $rules;
+    }
+
+    protected $attributes = array(
+      'id_role' => self::ROLE_GUEST,
+    );
 
     /**
      * The attributes that are mass assignable.
@@ -36,6 +55,7 @@ class User extends Authenticatable
         'password' ,
         'username' ,
         'id_role'  ,
+        'info',
     ];
 
     /**
@@ -47,6 +67,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // ---------------------------------
+    //
     public function is($role) {
         $role_const = 'self::ROLE_'.strtoupper($role);
         return $this->id_role == constant($role_const);
@@ -61,7 +83,12 @@ class User extends Authenticatable
         return $role_name[$this->id_role];
     }
 
-    // ---------------------------------
+    public function getInfoDataAttribute() {
+        if (empty($this->_info)) 
+            $this->_info = json_decode($this->info);
+        return $this->_info;
+    }
+
     public function site() {
         return $this->hasMany('App\Site', 'id_user');
     }

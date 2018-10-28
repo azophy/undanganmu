@@ -11,11 +11,14 @@ class Template extends Model
 
     protected $table = 'template';
 
-    static $rules = [
-        'name'          => 'string|required',
-        'path'          => 'string|required',
-        'description'   => 'string|nullable',
-    ];
+    static function rules($model=null) {
+       return [
+            'name'          => 'string|required',
+            'path'          => 'string|required',
+            'description'   => 'string|nullable',
+        ];
+    }
+
     public $fillable = [
         'name',
         'path',

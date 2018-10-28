@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use App\ValidatorTrait;
 use \Carbon\Carbon;
 
@@ -15,13 +16,22 @@ class Site extends Model
     private $_option=[], $_date_format=null;
     protected $table = 'site';
 
-    static $rules = [
-        'id_user'       => 'integer|required',
-        'id_template'   => 'integer|required',
-        'url_name'      => 'string|required',
-        //'page_title'    => 'string|required',
-        'option'        => 'string|nullable',
-    ];
+    static function rules($model=null) {
+        $rules = [
+            'id_user'       => 'integer|required',
+            'id_template'   => 'integer|required',
+            'url_name'      => 'string|required|unique:site,url_name',
+            //'page_title'    => 'string|required',
+            'option'        => 'string|nullable',
+        ];
+
+        // custom rules for updating models
+        if ($model != null)
+            $rules['url_name'] .= ','.$model->id;
+
+        return $rules;
+    }
+
     public $fillable = [
         'id_user',
         'id_template',

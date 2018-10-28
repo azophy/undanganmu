@@ -71,7 +71,7 @@ class SiteController extends Controller
      */
     public function update(Request $request, Site $site)
     {
-        $input = Site::validate($request);
+        $input = Site::validate($request, [], $site);
         $input['option'] = json_encode($request->input('option_data'));
 
         if ($site->update($input)) {
