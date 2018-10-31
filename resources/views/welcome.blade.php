@@ -270,6 +270,9 @@ function asset_url($param) {
     <!-- Custom scripts for this template -->
     <script src="{{ asset_url('templates/undanganmu') }}/js/creative.min.js"></script>
 
+    <!-- web chat code -->
+    @include('other.web_chat')
+
   </body>
 
 </html>
