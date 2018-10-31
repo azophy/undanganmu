@@ -6,6 +6,7 @@ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = 
 <!-- {/literal} END JIVOSITE CODE -->
 --}}
 
+{{--
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -19,3 +20,10 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
+--}}
+
+<!-- Crisp.chat codes -->
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="003b98db-cd31-496f-bb64-eb0b25674bdb";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<!-- end of Crisp.chat codes -->
+
+
