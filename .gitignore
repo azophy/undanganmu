@@ -13,3 +13,6 @@ yarn-error.log
 .env
 
 *.sw*
+
+# public asset folder
+public/assets/*
