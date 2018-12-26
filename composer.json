@@ -52,8 +52,7 @@
             "@php artisan package:discover"
         ],
         "post-install-cmd": [
-            "@php artisan migrate --force",
-            "@php artisan template:publish"
+            "@php artisan migrate --force"
         ]
     },
     "config": {

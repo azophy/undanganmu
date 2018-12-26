@@ -1,4 +1,8 @@
 <?php
+/*
+ * Unused in favor or /public/assets/.htaccess which allow accessing 
+ * /storage/app/templates folders without creating any symlinks.
+ */
 
 namespace App\Console\Commands;
 
