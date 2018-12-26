@@ -44,4 +44,20 @@ class MainController extends Controller
         else
             abort(404);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function display_site_lokasi($url_name)
+    {
+        $site = Site::where('url_name',$url_name)->first();
+        $info = json_decode($site->option);
+        if ($site)
+            return redirect("https://www.google.com/maps/search/?api=1&query=".$info->event_loc_1_lat.", ".$info->event_loc_1_long);
+        else
+            abort(404);
+    }
 }
