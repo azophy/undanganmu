@@ -1,7 +1,0 @@
-# AliasMatch ^/(.*)/(.*)$ ../storage/app/templates/$1/$2
-
-# https://stackoverflow.com/a/13702800/2496217
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteRule ^([^/]*)\/(.*)$ ../../storage/app/templates/$1/assets/$2 [QSA]
-</IfModule>
