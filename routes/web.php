@@ -50,7 +50,7 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->middleware(['auth','
  });
 
 // --------------- TOP LEVEL ROUTES -----------------
-Route::get('/', function () { return view('welcome'); });
+Route::get('/', function () { return view('undanganmu.index'); });
 Route::get('/{site_url}', 'MainController@display_site');
 Route::get('/{site_url}/lokasi', 'MainController@display_site_lokasi');
 
