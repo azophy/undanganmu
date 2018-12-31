@@ -118,6 +118,15 @@
         </div>
     </div>
     <div class="form-group row">
+        <label for="event_map" class="col-md-3 col-form-label">Event Location Coordinate</label>
+        <div class="col-md-9">
+            <input type="hidden" id="option_data_event_loc_1_lat" name="option_data[event_loc_1_lat]" value="{{ $model->option_data->event_loc_1_lat }}" placeholder="">
+            <input type="hidden" id="option_data_event_loc_1_long" name="option_data[event_loc_1_long]" value="{{ $model->option_data->event_loc_1_long }}" placeholder="">
+            <p>(click on map to change coordinate)</p>
+            <div id="event_map" style="width:100%;height:60vh;border:0"></div>
+        </div>
+    </div>
+    <div class="form-group row">
         <label for="option_data_event_loc_same" class="col-md-3 col-form-label">Event Location</label>
         <div class="col-md-9">
             {{ Form::checkbox('option_data[event_loc_same]',$model->option_data->event_loc_same, ['id' => "option_data_event_loc_same"]) }}
@@ -155,4 +164,59 @@
         </div>
     </div>
 </form>
+
+<script>
+// Initialize and add the map
+var map, marker = null;
+function initMap() {
+    var tengah_indonesia = {lat: -1.067975, lng: 116.8087373},
+        @if($model->option_data->event_loc_1_lat)
+        koordinat = {lat: {{ $model->option_data->event_loc_1_lat }}, lng: {{ $model->option_data->event_loc_1_long }}};
+        @else
+        koordinat = null;
+        @endif
+    map = new google.maps.Map(document.getElementById('event_map'), {
+        zoom: 5, 
+        center: tengah_indonesia,
+    });
+
+    if (koordinat != null) {
+        marker = new google.maps.Marker({
+          position: koordinat,
+          map: map,
+          draggable: true,
+        });
+        google.maps.event.addListener(marker, "drag", update_coordinate_input);
+        map.setZoom(17);
+        map.setCenter(koordinat);
+    }
+
+    google.maps.event.addListener(map, "click", function(event) {
+        if (marker == null) {
+            //console.log('marker is null');
+            marker = new google.maps.Marker({
+              position: event.latLng,
+              map: map,
+              draggable: true,
+            });
+
+            google.maps.event.addListener(marker, "drag", update_coordinate_input);
+        } else {
+            //console.log('marker not null');
+            marker.setPosition(event.latLng);
+        }
+        update_coordinate_input();
+    });
+}
+
+function update_coordinate_input(event) {
+    var latlng = marker.getPosition();
+    //console.log(marker);
+    //console.log(latlng);
+    $('#option_data_event_loc_1_lat').val(latlng.lat());
+    $('#option_data_event_loc_1_long').val(latlng.lng());
+}
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_API_KEY') }}&callback=initMap"></script>
 @endsection
