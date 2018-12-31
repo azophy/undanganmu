@@ -28,8 +28,8 @@ class PublishTemplates extends Command
      * Path of the template
      * @var string
      */
-    protected $template_folder = __DIR__ . '/../../../storage/app/templates';
-    protected $publish_folder = __DIR__ . '/../../../public/assets';
+    protected $template_folder;
+    protected $publish_folder;
 
     /**
      * Create a new command instance.
@@ -39,6 +39,9 @@ class PublishTemplates extends Command
     public function __construct()
     {
         parent::__construct();
+
+        $this->template_folder = base_path('/storage/app/templates');
+        $this->publish_folder = base_path('/public/assets');
     }
 
     /**
