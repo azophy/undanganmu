@@ -40,8 +40,8 @@ class PublishTemplates extends Command
     {
         parent::__construct();
 
-        $this->template_folder = base_path('/storage/app/templates');
-        $this->publish_folder = base_path('/public/assets');
+        $this->template_folder = base_path('storage/app/templates');
+        $this->publish_folder = base_path('public/assets');
     }
 
     /**
