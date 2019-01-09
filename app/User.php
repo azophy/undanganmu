@@ -89,7 +89,11 @@ class User extends Authenticatable
         return $this->_info;
     }
 
-    public function site() {
+    public function sites() {
         return $this->hasMany('App\Site', 'id_user');
+    }
+
+    public function templates() {
+        return $this->hasMany('App\Template', 'id_user');
     }
 }

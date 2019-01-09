@@ -16,7 +16,7 @@ class MainController extends Controller
 
     public function edit_site() {
         return view('member.edit_site', [
-            'model' => Auth::user()->site()->first(),
+            'model' => Auth::user()->sites()->first(),
         ]);
     }
 
@@ -28,7 +28,7 @@ class MainController extends Controller
         ]);
         $input['option'] = json_encode($request->input('option_data'));
 
-        $site = Auth::user()->site()->first();
+        $site = Auth::user()->sites()->first();
 
         if ($site->update($input)) {
             return redirect()->route('member.edit_site')->with('status', 'Updating site "'.$site->url_name.'" succeed');
