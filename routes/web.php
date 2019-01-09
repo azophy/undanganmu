@@ -45,8 +45,8 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->middleware(['auth','
     // site management routes 
     Route::resource('site', 'SiteController')->except(['show']);
     Route::resource('template', 'TemplateController')->except(['show']);
-    Route::get('user/{id}/create_custom_template', 'UserController@create_custom_template')->name('user.create_custom_template');
-    Route::post('user/{id}/create_custom_template', 'UserController@store_custom_template')->name('user.store_custom_template');
+    Route::get('user/{user}/create_custom_template', 'UserController@create_custom_template')->name('user.create_custom_template');
+    Route::post('user/{user}/create_custom_template', 'UserController@store_custom_template')->name('user.store_custom_template');
     Route::resource('user', 'UserController')->except(['show']);
     Route::redirect('/',route('admin.site.index'),301); // set default admin homepage
  });

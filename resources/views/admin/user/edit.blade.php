@@ -38,7 +38,7 @@
             <tbody>
                 @foreach ($model->templates as $template)
                 <tr>
-                    <td></td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $template->name }}</td>
                     <td> <a href="{{ route('admin.template.edit',['id' => $template->id]) }}">Edit</a> / <a onclick="javascript:delete_element({{ $template->id }})" href="#">Delete</a> </td>
                 </tr>

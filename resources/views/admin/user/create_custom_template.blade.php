@@ -23,13 +23,13 @@
             </div>
         @endif
 
-        <form class="form" action="{{ route('admin.user.store_custom_template',['id' => $user->id]) }}" method="POST">
+        <form class="form" action="{{ route('admin.user.store_custom_template',['user' => $user->id]) }}" method="POST">
             @method('POST')
             @csrf
             <div class="form-group row">
                 <label for="base_template_id" class="col-md-3 col-form-label">Base Template</label>
                 <div class="col-md-9">
-                    {!! Form::select('id_template', $user->available_template_list, null, ['class' => 'form-control']) !!}
+                    {!! Form::select('base_template_id', $user->available_template_list, null, ['class' => 'form-control']) !!}
                 </div>
             </div>
             <div class="form-group row">

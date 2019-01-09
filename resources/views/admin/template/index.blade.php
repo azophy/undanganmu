@@ -38,7 +38,7 @@
             <tbody>
                 @foreach ($templates as $template)
                 <tr>
-                    <td></td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $template->name }}</td>
                     <td>{{ $template->path }}</td>
                     <td>{{ $template::$TYPE_LABEL[$template->type] }}</td>

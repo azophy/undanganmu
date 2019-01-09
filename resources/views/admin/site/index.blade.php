@@ -38,7 +38,7 @@
             <tbody>
                 @foreach ($sites as $site)
                 <tr>
-                    <td></td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $site->id_user }}</td>
                     <td>{{ $site->url_name }}</td>
                     <td>{{ $site->option_data->event_title }}</td>

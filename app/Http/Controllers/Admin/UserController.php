@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Template;
+require_once(base_path('app/Helpers.php'));
 
 class UserController extends Controller
 {
@@ -102,7 +104,7 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Display custom template creation form
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -115,20 +117,33 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Actual custom template creation.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function store_custom_template(Request $request, User $user)
     {
-        $input = Template::validate($request);
+        $input = Template::validate($request, [
+            'base_template_id' => 'integer|required',
+        ]);
+        $input['id_user'] = $user->id;
 
         // copy the template folder
+        $old_path = explode('.', Template::find($input['base_template_id'])->path)[0];
+        $new_path = explode('.', $input['path'])[0];
+
+        $template_path = 'storage/app/templates/';
+        //error_log('old_path '. base_path($template_path . $old_path));
+        //error_log('new_path '. base_path($template_path . $new_path));
+        //exit();
+        //xcopy(base_path($template_path . $old_path) , base_path($template_path . $new_path), 775);
+        $clone_command = "git clone ". base_path($template_path . $old_path) . ' ' . base_path($template_path . $new_path);
+        shell_exec($clone_command);
 
         if ($model = Template::create($input)) {
-            return redirect()->route('admin.template.index')->with('status', 'Creating template "'.$model->name.'" succeed');
+            return redirect()->route('admin.user.edit', ['id' => $user->id])->with('status', 'Creating template "'.$model->name.'" succeed');
         } else
-            return redirect()->route('admin.template.create')->with('status', 'Error');
+            return redirect()->route('admin.user.edit', ['id' => $user->id])->with('status', 'Error');
     }
 }
