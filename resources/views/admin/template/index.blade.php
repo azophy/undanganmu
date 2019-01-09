@@ -31,6 +31,7 @@
                     <th>No</th>
                     <th>Name</th>
                     <th>Path</th>
+                    <th>Type</th>
                     <th>Description</th>
                 </tr>
             </thead>
@@ -40,6 +41,7 @@
                     <td></td>
                     <td>{{ $template->name }}</td>
                     <td>{{ $template->path }}</td>
+                    <td>{{ $template::$TYPE_LABEL[$template->type] }}</td>
                     <td>{{ $template->description }}</td>
                     <td> <a href="{{ route('admin.template.edit',['id' => $template->id]) }}">Edit</a> / <a onclick="javascript:delete_element({{ $template->id }})" href="#">Delete</a> </td>
                 </tr>

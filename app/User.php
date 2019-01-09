@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Validation\Rule;
 use App\ValidatorTrait;
 use App\ConstantExportTrait;
+use App\Template;
 
 class User extends Authenticatable
 {
@@ -87,6 +88,13 @@ class User extends Authenticatable
         if (empty($this->_info)) 
             $this->_info = json_decode($this->info);
         return $this->_info;
+    }
+
+    public function getAvailableTemplateListAttribute() {
+        $free_templates = Template::where('type',Template::TYPE_FREE)->pluck('name','id')->all();
+        $owned_templates = $this->templates->pluck('name','id')->all();
+
+        return array_replace($free_templates, $owned_templates);
     }
 
     public function sites() {

@@ -13,6 +13,12 @@ class Template extends Model
     const TYPE_PRIVATE = '1'; // custom for each user
     const TYPE_PREMIUM = '2';
     const TYPE_FREE    = '3';
+    static $TYPE_LABEL = [
+        0 => 'Hidden',
+        1 => 'Private',
+        2 => 'Premium',
+        3 => 'Free',
+    ];
 
     protected $table = 'template';
 

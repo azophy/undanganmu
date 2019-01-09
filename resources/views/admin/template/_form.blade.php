@@ -18,6 +18,12 @@
     @method($method)
     @csrf
     <div class="form-group row">
+        <label for="id_user" class="col-md-3 col-form-label">Template Owner Id</label>
+        <div class="col-md-9">
+            <input type="text" class="form-control" id="name" name="id_user" value="{{ $model->id_user }}" placeholder="">
+        </div>
+    </div>
+    <div class="form-group row">
         <label for="name" class="col-md-3 col-form-label">Template Name</label>
         <div class="col-md-9">
             <input type="text" class="form-control" id="name" name="name" value="{{ $model->name }}" placeholder="">
@@ -27,6 +33,16 @@
         <label for="path" class="col-md-3 col-form-label">Template Path</label>
         <div class="col-md-9">
             <input type="text" class="form-control" id="path" name="path" value="{{ $model->path }}" placeholder="">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="type" class="col-md-3 col-form-label">Template Type</label>
+        <div class="col-md-9">
+            {!! Form::select('type', 
+                    \App\Template::$TYPE_LABEL, 
+                    $model->type, 
+                    ['class' => 'form-control']
+            ) !!}
         </div>
     </div>
     <div class="form-group row">

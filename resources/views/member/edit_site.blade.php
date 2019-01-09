@@ -27,7 +27,7 @@
     <div class="form-group row">
         <label for="id_template" class="col-md-3 col-form-label">Template</label>
         <div class="col-md-9">
-            {!! Form::select('id_template', \App\Template::pluck('name','id'), $model->id_template, ['class' => 'form-control']) !!}
+            {!! Form::select('id_template', $model->user->available_template_list, $model->id_template, ['class' => 'form-control']) !!}
         </div>
     </div>
 
