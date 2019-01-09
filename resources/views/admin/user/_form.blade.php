@@ -56,8 +56,8 @@
     </div>
 
     <div class="form-group row">
-        <label for="url_name" class="col-md-4 col-form-label text-md-right">{{ __('Contact Number') }}</label>
-        <div class="col-md-6">
+        <label for="url_name" class="col-md-3 col-form-label">{{ __('Contact Number') }}</label>
+        <div class="col-md-9">
             <input type="text" class="form-control" id="info_data_contact_number" name="info_data[contact_number]" value="{{ (!empty($model->info_data)) ? $model->info_data->contact_number : '' }}" placeholder="">
 
             @if ($errors->has('info_data[contact_number]'))

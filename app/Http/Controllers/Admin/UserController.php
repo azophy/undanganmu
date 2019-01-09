@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\Controller;
 use App\User;
 
@@ -97,5 +99,36 @@ class UserController extends Controller
             return redirect()->route('admin.user.index')->with('status', 'Deleting user "'.$username.'" succeed');
         else
             return redirect()->route('admin.user.index')->with('status', 'Deleting user "'.$username.'" failed');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function create_custom_template(User $user)
+    {
+        return view('admin.user.create_custom_template',[
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function store_custom_template(Request $request, User $user)
+    {
+        $input = Template::validate($request);
+
+        // copy the template folder
+
+        if ($model = Template::create($input)) {
+            return redirect()->route('admin.template.index')->with('status', 'Creating template "'.$model->name.'" succeed');
+        } else
+            return redirect()->route('admin.template.create')->with('status', 'Error');
     }
 }
